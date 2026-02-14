@@ -1,0 +1,209 @@
+/* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Georgia, serif;
+}
+
+html, body {
+    height: 100%;
+}
+
+/* =====================================================
+   HOME PAGE (Chess Background Image)
+   ===================================================== */
+
+body.home-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: url("/static/chess-bg.png") center center / cover no-repeat;
+}
+
+/* Home Content */
+.home-container {
+    text-align: center;
+}
+
+.title {
+    font-size: 100px;
+    font-weight: bold;
+    color: black;
+}
+
+.subtitle {
+    margin-top: 30px;
+    font-size: 26px;
+    color: black;
+}
+
+.buttons {
+    margin-top: 40px;
+}
+
+button {
+    padding: 14px 40px;
+    font-size: 18px;
+    border-radius: 12px;
+    border: 2px solid black;
+    cursor: pointer;
+    margin: 0 15px;
+    transition: 0.3s ease;
+}
+
+.play-btn {
+    background: black;
+    color: white;
+}
+
+.play-btn:hover {
+    background: #333;
+}
+
+.instruction-btn {
+    background: #e0e0e0;
+    color: black;
+}
+
+.instruction-btn:hover {
+    background: #c9c9c9;
+}
+
+/* =====================================================
+   PLAY PAGE (Game Layout)
+   ===================================================== */
+
+/* =====================================================
+   PLAY PAGE (Centered Symmetrical Layout)
+   ===================================================== */
+
+body.play-page {
+    background: #f4f4f4;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;   /* centers vertically */
+}
+
+/* Main Container */
+.play-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Info Bar (Top) */
+.info-bar {
+    display: flex;
+    gap: 60px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* Board */
+.board {
+    display: grid;
+    grid-template-columns: repeat(8, 50px);
+    grid-template-rows: repeat(8, 50px);
+    border: 4px solid #222;
+}
+
+/* Squares */
+.square {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.square:hover {
+    transform: scale(1.05);
+}
+
+.white {
+    background-color: #ffffff;
+}
+
+.gray {
+    background-color: #cfcfcf;
+}
+
+/* Buttons (Bottom) */
+.board-buttons {
+    display: flex;
+    gap: 25px;
+}
+
+.board-buttons button {
+    padding: 8px 24px;
+    font-size: 15px;
+    border-radius: 8px;
+    border: none;
+    background: #222;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.board-buttons button:hover {
+    background: #444;
+}
+
+.message {
+    font-size: 18px;
+    font-weight: bold;
+}
+/* ================= INSTRUCTIONS PAGE ================= */
+
+body {
+    background-color: #d9d9d9;   /* whole page gray */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.instructions-section {
+    text-align: center;
+    max-width: 800px;
+    padding: 40px;
+}
+
+/* Heading */
+.instructions-section h2 {
+    font-size: 48px;      /* bigger heading */
+    margin-bottom: 30px;  /* space below heading */
+}
+
+/* Paragraphs */
+.instructions-section p {
+    font-size: 22px;      /* bigger text */
+    margin: 18px 0;       /* space between sentences */
+}
+
+/* Bullet List */
+.rules {
+    list-style-type: disc;
+    display: inline-block;
+    text-align: left;
+    font-size: 22px;
+    margin: 20px 0 25px 0;
+    padding-left: 25px;
+}
+
+.rules li {
+    margin-bottom: 12px;  /* space between bullet points */
+}
+
+/* Home Button spacing */
+.instructions-section a {
+    display: inline-block;
+    margin-top: 30px;   /* space above button */
+}
