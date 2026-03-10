@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, jsonify
 from utils import calculate_conflicts
 from ai_solver import solve_queens
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="../templates", static_folder="../static")
 
 @app.route("/")
 def home():
@@ -26,5 +26,4 @@ def solve():
     solution = solve_queens()
     return jsonify({"solution": solution})
 
-if __name__ == "__main__":
-    app.run(debug=True)
+handler = app

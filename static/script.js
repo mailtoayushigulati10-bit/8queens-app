@@ -125,31 +125,27 @@ function checkWin(conflicts) {
 
 /* ========================= SHOW SOLUTION ANIMATED ========================= */
 function showSolution() {
-    fetch("/solve", { method: "POST" })
-        .then(response => response.json())
-        .then(data => {
-            const solution = data.solution; // e.g., [0,4,7,5,2,6,1,3]
-            const container = document.getElementById("solutionStepsContainer");
-            
-            container.innerHTML = ""; // clear previous steps
-            resetBoard(); // clear board first
 
-            // Animate steps slowly, 3 seconds apart
-            solution.forEach((col, row) => {
-                const stepLine = document.createElement("div"); // simple line
-                stepLine.textContent = ""; // start empty
-                container.appendChild(stepLine);
+    const solution = [0,4,7,5,2,6,1,3]; // known optimal solution
+    const container = document.getElementById("solutionStepsContainer");
 
-                setTimeout(() => {
-                    board[row] = col;
-                    render();
-                    calculateConflicts();
+    container.innerHTML = "";
+    resetBoard();
 
-                    // Show step
-                    stepLine.textContent = `Step ${row + 1}: Place Queen ${row + 1} at Row ${row + 1}, Column ${col + 1}`;
-                    stepLine.classList.add("show-step"); // optional fade-in class
-                }, row * 3000); // 3 seconds between steps
-            });
-        })
-        .catch(err => console.error("Error fetching solution:", err));
+    solution.forEach((col, row) => {
+        const stepLine = document.createElement("div");
+        container.appendChild(stepLine);
+
+        setTimeout(() => {
+            board[row] = col;
+            render();
+            calculateConflicts();
+
+            stepLine.textContent =
+            `Step ${row+1}: Place Queen at Row ${row+1}, Column ${col+1}`;
+
+            stepLine.classList.add("show-step");
+
+        }, row * 3000);
+    });
 }
