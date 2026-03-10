@@ -11,14 +11,13 @@ html, body {
 }
 
 /* =====================================================
-   HOME PAGE (Chess Background Image)
+   HOME PAGE
    ===================================================== */
 
 body.home-page {
     display: flex;
     justify-content: center;
     align-items: center;
-
     background: url("/static/chess-bg.png") center center / cover no-repeat;
 }
 
@@ -72,11 +71,7 @@ button {
 }
 
 /* =====================================================
-   PLAY PAGE (Game Layout)
-   ===================================================== */
-
-/* =====================================================
-   PLAY PAGE (Centered Symmetrical Layout)
+   PLAY PAGE
    ===================================================== */
 
 body.play-page {
@@ -84,7 +79,7 @@ body.play-page {
     height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;   /* centers vertically */
+    align-items: center;
 }
 
 /* Main Container */
@@ -92,13 +87,28 @@ body.play-page {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
 }
 
-/* Info Bar (Top) */
-.info-bar {
+/* Layout: Board + Side Button */
+.game-area {
     display: flex;
-    gap: 60px;
+    gap: 50px;
+    align-items: flex-start;
+}
+
+/* Board Section */
+.board-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Top Bar (Conflicts & Time) */
+.top-bar {
+    width: 400px; /* 8 x 50px board */
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
     font-size: 18px;
     font-weight: 500;
 }
@@ -135,13 +145,15 @@ body.play-page {
     background-color: #cfcfcf;
 }
 
-/* Buttons (Bottom) */
-.board-buttons {
+/* Bottom Bar (Reset & Home) */
+.bottom-bar {
+    width: 400px;
     display: flex;
-    gap: 25px;
+    justify-content: space-between;
+    margin-top: 10px;
 }
 
-.board-buttons button {
+.bottom-bar button {
     padding: 8px 24px;
     font-size: 15px;
     border-radius: 8px;
@@ -152,18 +164,28 @@ body.play-page {
     transition: 0.3s ease;
 }
 
-.board-buttons button:hover {
+.bottom-bar button:hover {
     background: #444;
 }
 
+/* Side Button */
+.side-button {
+    margin-top: 40px;
+}
+
+/* Message */
 .message {
+    margin-top: 15px;
     font-size: 18px;
     font-weight: bold;
 }
-/* ================= INSTRUCTIONS PAGE ================= */
 
-body {
-    background-color: #d9d9d9;   /* whole page gray */
+/* =====================================================
+   INSTRUCTIONS PAGE
+   ===================================================== */
+
+body:not(.home-page):not(.play-page) {
+    background-color: #d9d9d9;
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -176,19 +198,16 @@ body {
     padding: 40px;
 }
 
-/* Heading */
 .instructions-section h2 {
-    font-size: 48px;      /* bigger heading */
-    margin-bottom: 30px;  /* space below heading */
+    font-size: 48px;
+    margin-bottom: 30px;
 }
 
-/* Paragraphs */
 .instructions-section p {
-    font-size: 22px;      /* bigger text */
-    margin: 18px 0;       /* space between sentences */
+    font-size: 22px;
+    margin: 18px 0;
 }
 
-/* Bullet List */
 .rules {
     list-style-type: disc;
     display: inline-block;
@@ -199,11 +218,51 @@ body {
 }
 
 .rules li {
-    margin-bottom: 12px;  /* space between bullet points */
+    margin-bottom: 12px;
 }
 
-/* Home Button spacing */
 .instructions-section a {
     display: inline-block;
-    margin-top: 30px;   /* space above button */
+    margin-top: 30px;
+}
+/* Solution Box */
+#solutionBox {
+    display: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.5s ease;
+    margin-top: 20px;
+    padding: 0 15px;
+    border: 1px solid #222;
+    background: #fff;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Show class triggers smooth expand */
+#solutionBox.show {
+    display: block;
+    max-height: 500px;
+    padding: 15px;
+}
+
+/* Step list styling */
+#solutionSteps {
+    margin-top: 10px;
+    font-size: 18px;
+    line-height: 1.6;
+    padding-left: 20px;
+}
+
+#solutionSteps li {
+    margin-bottom: 8px;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#solutionSteps li.show-step {
+    opacity: 1;
+    transform: translateY(0);
 }
