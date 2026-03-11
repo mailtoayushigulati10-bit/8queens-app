@@ -83,6 +83,10 @@ function resetBoard() {
   squares.forEach(square => {
     square.style.filter = "none";
   });
+
+  // Also clear solution steps on reset
+  const container = document.getElementById("solutionStepsContainer");
+  if (container) container.innerHTML = "";
 }
 
 /* ========================= WIN CHECK ========================= */
@@ -125,27 +129,23 @@ function checkWin(conflicts) {
 
 /* ========================= SHOW SOLUTION ANIMATED ========================= */
 function showSolution() {
+  const solution = [0, 4, 7, 5, 2, 6, 1, 3]; // known optimal solution
+  const container = document.getElementById("solutionStepsContainer");
 
-    const solution = [0,4,7,5,2,6,1,3]; // known optimal solution
-    const container = document.getElementById("solutionStepsContainer");
+  container.innerHTML = "";
+  resetBoard();
 
-    container.innerHTML = "";
-    resetBoard();
+  solution.forEach((col, row) => {
+    const stepLine = document.createElement("div");
+    container.appendChild(stepLine);
 
-    solution.forEach((col, row) => {
-        const stepLine = document.createElement("div");
-        container.appendChild(stepLine);
+    setTimeout(() => {
+      board[row] = col;
+      render();
+      calculateConflicts();
 
-        setTimeout(() => {
-            board[row] = col;
-            render();
-            calculateConflicts();
-
-            stepLine.textContent =
-            `Step ${row+1}: Place Queen at Row ${row+1}, Column ${col+1}`;
-
-            stepLine.classList.add("show-step");
-
-        }, row * 3000);
-    });
+      stepLine.textContent = `Step ${row + 1}: Place Queen at Row ${row + 1}, Column ${col + 1}`;
+      stepLine.classList.add("show-step");
+    }, row * 3000);
+  });
 }
