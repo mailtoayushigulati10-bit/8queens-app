@@ -1,19 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Instructions - 8 Queens</title>
+    <meta charset="UTF-8">
+    <title>Instructions</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body class="instructions-page">
+<body>
     <div class="instructions-section">
-        <h2>How to Play</h2>
-        <p>Place 8 queens on the board so that no two queens attack each other.</p>
+        <h2>How to Play the 8-Queens Game</h2>
+        <p>The goal of this game is to place 8 queens on an 8x8 chessboard so that no two queens attack each other.</p>
+
         <ul class="rules">
-            <li>One queen per row.</li>
-            <li>One queen per column.</li>
-            <li>No two queens share the same diagonal.</li>
+            <li>Queens can move horizontally, vertically, and diagonally across the board.</li>
+            <li>No two queens should share the same row.</li>
+            <li>No two queens should share the same column.</li>
+            <li>No two queens should share the same diagonal.</li>
+            <li>Click on a square to place or remove a queen.</li>
+            <li>Use the "Reset" button to clear the board at any time.</li>
         </ul>
-        <a href="{{ url_for('play') }}"><button class="play-btn">Play Now</button></a>
+
+        <p>Try placing the queens carefully and see if you can solve it yourself! You can also view the optimal solution for guidance.</p>
+
+        <button onclick="window.location.href='/play'" style="margin-top: 30px; padding:12px 30px; font-size:18px; border-radius:10px; cursor:pointer;">Play Now</button>
     </div>
 </body>
 </html>

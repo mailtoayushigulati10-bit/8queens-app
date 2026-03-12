@@ -1,47 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Play 8 Queens</title>
+    <meta charset="UTF-8">
+    <title>Play Chess</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
-        .show-step { opacity: 0; animation: fadeIn 0.8s forwards; }
-        @keyframes fadeIn { to { opacity: 1; } }
-        #solutionStepsContainer div { margin: 5px 0; }
+        /* Optional: make queens stand out */
+        .queen {
+            font-weight: bold;
+            color: red;
+        }
     </style>
 </head>
 <body class="play-page">
-<div class="play-container">
-    <div class="game-area">
-
-        <!-- Board Section -->
-        <div class="board-section">
-            <div class="top-bar">
-                <span>Conflicts: <span id="conflicts">0</span></span>
-                <span>Time: <span id="timer">0</span> sec</span>
+    <div class="play-container">
+        <div class="game-area">
+            <div class="board-section">
+                <div class="top-bar">
+                    <div>Conflicts: <span id="conflicts">0</span></div>
+                    <div>Time: <span id="timer">00:00</span></div>
+                </div>
+                <div class="board" id="board"></div>
+                <div class="bottom-bar">
+                    <button onclick="resetBoard()">Reset</button>
+                    <button onclick="window.location.href='/'">Home</button>
+                </div>
             </div>
-            <div id="board" class="board"></div>
-            <div class="bottom-bar">
-                <button onclick="resetBoard()">Reset</button>
-                <a href="{{ url_for('home') }}"><button>Home</button></a>
+            <div class="side-button">
+                <button onclick="showSolution()">Show Optimal Solution</button>
+                <div id="solutionBox">
+                    <ol id="solutionSteps"></ol>
+                </div>
             </div>
         </div>
-
-        <!-- Side Button -->
-        <div class="side-button">
-            <button onclick="fetchSolution()">Optimal Solution</button>
-            <div id="solutionStepsContainer"></div>
-        </div>
+        <div class="message" id="message"></div>
     </div>
-</div>
 
-<script src="{{ url_for('static', filename='script.js') }}"></script>
-<script>
-function fetchSolution() {
-    fetch("/solve")
-        .then(res => res.json())
-        .then(data => showSolution(data.solution))
-        .catch(err => console.error("Error fetching solution:", err));
-}
-</script>
+    <script>
+        const board = document.getElementById('board');
+
+        // Create 8x8 grid
+        for (let row = 0; row < 8; row++) {
+            for (let col = 0; col < 8; col++) {
+                const square = document.createElement('div');
+                square.classList.add('square');
+                // Add coloring
+                if ((row + col) % 2 === 0) square.classList.add('white');
+                else square.classList.add('gray');
+
+                // Toggle queen on click
+                square.addEventListener('click', () => {
+                    if (square.textContent === '♛') {
+                        square.textContent = '';
+                        square.classList.remove('queen');
+                    } else {
+                        square.textContent = '♛';
+                        square.classList.add('queen');
+                    }
+                });
+
+                board.appendChild(square);
+            }
+        }
+
+        function resetBoard() {
+            document.querySelectorAll('.square').forEach(sq => {
+                sq.textContent = '';
+                sq.classList.remove('queen');
+            });
+            document.getElementById('conflicts').textContent = '0';
+        }
+
+        function showSolution() {
+            const solutionBox = document.getElementById('solutionBox');
+            solutionBox.classList.toggle('show');
+            const steps = document.getElementById('solutionSteps');
+            steps.innerHTML = '';
+            const sampleSteps = [
+                'Place queen at row 1, column 5',
+                'Place queen at row 2, column 7',
+                'Place queen at row 3, column 2',
+                'Place queen at row 4, column 4',
+                'Place queen at row 5, column 1',
+                'Place queen at row 6, column 8',
+                'Place queen at row 7, column 6',
+                'Place queen at row 8, column 3'
+            ];
+            sampleSteps.forEach((step, i) => {
+                const li = document.createElement('li');
+                li.textContent = step;
+                setTimeout(() => li.classList.add('show-step'), i * 300);
+                steps.appendChild(li);
+            });
+        }
+    </script>
 </body>
 </html>
