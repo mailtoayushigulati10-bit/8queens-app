@@ -1,32 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>8 Queens Game</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body class="home-page">
-
-<div class="home-container">
-    <h1 class="title">♛ 8 Queens ♛</h1>
-
-    <p class="subtitle">
-        Can you place 8 queens without conflicts?
-    </p>
-
-    <div class="buttons">
-        <a href="/play">
-            <button class="play-btn">Play</button>
-        </a>
-
-        <a href="/instructions">
-            <button class="instruction-btn">Instructions</button>
-        </a>
+    <div class="home-container">
+        <div class="title">8 Queens</div>
+        <div class="subtitle">Challenge Your Mind!</div>
+        <div class="buttons">
+            <a href="{{ url_for('play') }}"><button class="play-btn">Play</button></a>
+            <a href="{{ url_for('instructions') }}"><button class="instruction-btn">Instructions</button></a>
+        </div>
     </div>
-</div>
-
 </body>
 </html>

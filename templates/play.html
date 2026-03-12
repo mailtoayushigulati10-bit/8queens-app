@@ -2,97 +2,46 @@
 <html>
 <head>
     <title>Play 8 Queens</title>
-    <link rel="stylesheet" href="/static/style.css?v=2">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
-        /* Optional fade-in animation for steps */
-        .show-step {
-            opacity: 0;
-            animation: fadeIn 1s forwards;
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
-
-        #solutionStepsContainer div {
-            margin: 5px 0;
-        }
+        .show-step { opacity: 0; animation: fadeIn 0.8s forwards; }
+        @keyframes fadeIn { to { opacity: 1; } }
+        #solutionStepsContainer div { margin: 5px 0; }
     </style>
 </head>
-
 <body class="play-page">
-
 <div class="play-container">
-
-    <!-- Board + Side Button -->
     <div class="game-area">
 
+        <!-- Board Section -->
         <div class="board-section">
-
-            <!-- Top Bar (Conflicts & Time) -->
             <div class="top-bar">
                 <span>Conflicts: <span id="conflicts">0</span></span>
                 <span>Time: <span id="timer">0</span> sec</span>
             </div>
-
-            <!-- Board -->
             <div id="board" class="board"></div>
-
-            <!-- Bottom Bar (Reset & Home) -->
             <div class="bottom-bar">
                 <button onclick="resetBoard()">Reset</button>
-                <a href="/"><button>Home</button></a>
+                <a href="{{ url_for('home') }}"><button>Home</button></a>
             </div>
-
         </div>
 
-        <!-- Side Button Only -->
+        <!-- Side Button -->
         <div class="side-button">
-            <button onclick="showSolution()">Optimal Solution</button>
-            
-            <!-- Steps will appear directly under the button -->
+            <button onclick="fetchSolution()">Optimal Solution</button>
             <div id="solutionStepsContainer"></div>
         </div>
-
     </div>
-
 </div>
 
-<script src="/static/script.js?v=2"></script>
-
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 <script>
-function showSolution() {
-    fetch("/solve", { method: "POST" })
-        .then(response => response.json())
-        .then(data => {
-            const solution = data.solution; // e.g., [0,4,7,5,2,6,1,3]
-            const container = document.getElementById("solutionStepsContainer");
-            
-            container.innerHTML = ""; // clear previous steps
-            resetBoard(); // clear board first
-
-            // Animate steps slowly, 3 seconds apart
-            solution.forEach((col, row) => {
-                const stepLine = document.createElement("div"); // simple div for step
-                stepLine.textContent = ""; // start empty
-                container.appendChild(stepLine);
-
-                setTimeout(() => {
-                    board[row] = col;
-                    render();
-                    calculateConflicts();
-
-                    // Show step text with optional fade-in
-                    stepLine.textContent = `Step ${row + 1}: Place Queen ${row + 1} at Row ${row + 1}, Column ${col + 1}`;
-                    stepLine.classList.add("show-step"); 
-                }, row * 3000); // 3 seconds between steps
-            });
-        })
+function fetchSolution() {
+    fetch("/solve")
+        .then(res => res.json())
+        .then(data => showSolution(data.solution))
         .catch(err => console.error("Error fetching solution:", err));
 }
 </script>
-
 </body>
 </html>

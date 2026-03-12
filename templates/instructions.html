@@ -1,36 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Instructions</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <title>Instructions - 8 Queens</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
-
-<div class="instructions-section">
-
-    <h2>Game Instructions</h2>
-
-    <p>
-        Place 8 queens on the chessboard such that:
-    </p>
-
-    <ul class="rules">
-        <li>No two queens share the same row</li>
-        <li>No two queens share the same column</li>
-        <li>No two queens share the same diagonal</li>
-    </ul>
-
-    <p>
-        Goal: Achieve 0 conflicts.
-    </p>
-
-    <p>
-        AI uses Backtracking Algorithm (Constraint Satisfaction Problem).
-    </p>
-
-    <a href="/"><button>Home</button></a>
-
-</div>
-
+<body class="instructions-page">
+    <div class="instructions-section">
+        <h2>How to Play</h2>
+        <p>Place 8 queens on the board so that no two queens attack each other.</p>
+        <ul class="rules">
+            <li>One queen per row.</li>
+            <li>One queen per column.</li>
+            <li>No two queens share the same diagonal.</li>
+        </ul>
+        <a href="{{ url_for('play') }}"><button class="play-btn">Play Now</button></a>
+    </div>
 </body>
 </html>

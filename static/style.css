@@ -13,15 +13,13 @@ html, body {
 /* =====================================================
    HOME PAGE
    ===================================================== */
-
 body.home-page {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url("/static/chess-bg.png") center center / cover no-repeat;
+    background: url("../static/chess-bg.png") center center / cover no-repeat;
 }
 
-/* Home Content */
 .home-container {
     text-align: center;
 }
@@ -73,7 +71,6 @@ button {
 /* =====================================================
    PLAY PAGE
    ===================================================== */
-
 body.play-page {
     background: #f4f4f4;
     height: 100vh;
@@ -82,30 +79,26 @@ body.play-page {
     align-items: center;
 }
 
-/* Main Container */
 .play-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* Layout: Board + Side Button */
 .game-area {
     display: flex;
     gap: 50px;
     align-items: flex-start;
 }
 
-/* Board Section */
 .board-section {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* Top Bar (Conflicts & Time) */
 .top-bar {
-    width: 400px; /* 8 x 50px board */
+    width: 400px;
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
@@ -113,7 +106,6 @@ body.play-page {
     font-weight: 500;
 }
 
-/* Board */
 .board {
     display: grid;
     grid-template-columns: repeat(8, 50px);
@@ -121,7 +113,6 @@ body.play-page {
     border: 4px solid #222;
 }
 
-/* Squares */
 .square {
     width: 50px;
     height: 50px;
@@ -145,7 +136,6 @@ body.play-page {
     background-color: #cfcfcf;
 }
 
-/* Bottom Bar (Reset & Home) */
 .bottom-bar {
     width: 400px;
     display: flex;
@@ -168,12 +158,10 @@ body.play-page {
     background: #444;
 }
 
-/* Side Button */
 .side-button {
     margin-top: 40px;
 }
 
-/* Message */
 .message {
     margin-top: 15px;
     font-size: 18px;
@@ -183,7 +171,6 @@ body.play-page {
 /* =====================================================
    INSTRUCTIONS PAGE
    ===================================================== */
-
 body:not(.home-page):not(.play-page) {
     background-color: #d9d9d9;
     min-height: 100vh;
@@ -225,7 +212,10 @@ body:not(.home-page):not(.play-page) {
     display: inline-block;
     margin-top: 30px;
 }
-/* Solution Box */
+
+/* =====================================================
+   SOLUTION BOX
+   ===================================================== */
 #solutionBox {
     display: none;
     max-height: 0;
@@ -240,14 +230,12 @@ body:not(.home-page):not(.play-page) {
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-/* Show class triggers smooth expand */
 #solutionBox.show {
     display: block;
     max-height: 500px;
     padding: 15px;
 }
 
-/* Step list styling */
 #solutionSteps {
     margin-top: 10px;
     font-size: 18px;
